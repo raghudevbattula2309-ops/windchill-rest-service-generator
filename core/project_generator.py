@@ -35,17 +35,21 @@ class ProjectGenerator:
             # --------------------------------------------
             if template_info["template"] == "java/java_helper.template":
 
+                from core.java_class_generator import JavaClassGenerator
+
                 generated_content = JavaClassGenerator.generate(project)
 
-            # --------------------------------------------
-            # JSON / JS files are generated from templates
-            # --------------------------------------------
+            elif template_info["template"] == "java/sps_modification_list.template":
+
+                from core.java.dto_generator import DTOGenerator
+
+                generated_content = DTOGenerator.generate(project)
+
             else:
 
                 template_content = TemplateEngine.read(template_path)
 
                 generated_content = PlaceholderEngine.replace(template_content, project)
-
             # Replace placeholders in output path
             target = PlaceholderEngine.replace(template_info["target"], project)
 

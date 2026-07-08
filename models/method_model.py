@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from models.input_parameter import InputParameter
-from models.output_attribute import OutputAttribute
+from models.windchill_attribute import WindchillAttribute
 
 
 @dataclass
@@ -13,7 +13,7 @@ class MethodModel:
 
     input_parameters: list[InputParameter]
 
-    output_attributes: list[OutputAttribute]
+    output_attributes: list[WindchillAttribute]
 
     root_object: str
 
