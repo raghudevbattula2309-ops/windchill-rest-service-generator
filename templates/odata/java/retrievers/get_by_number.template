@@ -1,0 +1,24 @@
+/**
+ * Fetch {{ROOT_OBJECT}} by number.
+ */
+public {{ROOT_OBJECT}} get{{ROOT_OBJECT}}FromNumber(String number)
+        throws WTException {
+
+    QuerySpec qs = new QuerySpec({{ROOT_OBJECT}}.class);
+
+    SearchCondition condition = new SearchCondition(
+            {{ROOT_OBJECT}}.class,
+            {{ROOT_OBJECT}}.{{NUMBER_ATTRIBUTE}},
+            SearchCondition.EQUAL,
+            number);
+
+    qs.appendWhere(condition);
+
+    QueryResult qr = PersistenceHelper.manager.find(qs);
+
+    if (qr.hasMoreElements()) {
+        return ({{ROOT_OBJECT}}) qr.nextElement();
+    }
+
+    return null;
+}

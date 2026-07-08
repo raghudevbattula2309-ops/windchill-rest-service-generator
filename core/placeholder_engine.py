@@ -27,6 +27,8 @@ class PlaceholderEngine:
             Placeholders.INPUT_LABEL: method.input_parameters[0].description,
             Placeholders.INPUT_PARAMETER: method.input_parameters[0].name,
             Placeholders.OUTPUT_SCHEMA: method.return_type,
+            Placeholders.ROOT_OBJECT: method.root_object,
+            Placeholders.NUMBER_ATTRIBUTE: "NUMBER",
         }
 
         output = template_content

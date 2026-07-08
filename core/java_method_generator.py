@@ -25,7 +25,10 @@ class JavaMethodGenerator:
         // Retrieval Strategy:
         // {method.retrieval_strategy}
 
-        // TODO Retrieve Root Object
+        retrieval = (
+            f"{method.root_object} object = "
+            f"get{method.root_object}FromNumber(number);"
+        )
 
         // TODO Business Logic
 
