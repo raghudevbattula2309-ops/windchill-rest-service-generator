@@ -1,0 +1,22 @@
+class Placeholders:
+    """
+    All template placeholders used in the generator.
+    """
+
+    PROJECT_NAME = "{{PROJECT_NAME}}"
+
+    JAVA_PACKAGE = "{{JAVA_PACKAGE}}"
+
+    JAVA_CLASS = "{{JAVA_CLASS}}"
+
+    FUNCTION_NAME = "{{FUNCTION_NAME}}"
+
+    INPUT_LABEL = "{{INPUT_LABEL}}"
+
+    INPUT_PARAMETER = "{{INPUT_PARAMETER}}"
+
+    OUTPUT_SCHEMA = "{{OUTPUT_SCHEMA}}"
+
+    PROJECT_NAME_LOWER = "{{PROJECT_NAME_LOWER}}"
+
+    PROJECT_NAME_UPPER = "{{PROJECT_NAME_UPPER}}"

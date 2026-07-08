@@ -1,0 +1,36 @@
+{
+    "name": "Windchill OData REST Service",
+    "version": "1.0",
+    "templates": [
+        {
+            "template": "doc/config.template",
+            "target": "codebase/rest/custom/doc/",
+            "output": "config.{{PROJECT_NAME}}.json"
+        },
+        {
+            "template": "domain/domain.template",
+            "target": "codebase/rest/custom/domain/",
+            "output": "{{PROJECT_NAME}}.json"
+        },
+        {
+            "template": "js/import.js.template",
+            "target": "codebase/rest/custom/domain/{{PROJECT_NAME}}/v1/",
+            "output": "import.js"
+        },
+        {
+            "template": "json/import.json.template",
+            "target": "codebase/rest/custom/domain/{{PROJECT_NAME}}/v1/",
+            "output": "import.json"
+        },
+        {
+            "template": "java/java_helper.template",
+            "target": "src/ext/geode/{{PROJECT_NAME_LOWER}}/spsquery/",
+            "output": "{{JAVA_CLASS}}.java"
+        },
+        {
+            "template": "complexType/output_schema.template",
+            "target": "codebase/rest/custom/domain/{{PROJECT_NAME}}/v1/complexType/",
+            "output": "{{OUTPUT_SCHEMA}}.json"
+        }
+    ]
+}

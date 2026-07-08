@@ -1,0 +1,11 @@
+/*
+  TURBOMECA
+  Projet GEODE
+*/
+
+function function_{{FUNCTION_NAME}}(data, params) {
+
+    var helper = Java.type("{{JAVA_PACKAGE}}.{{JAVA_CLASS}}");
+
+    return helper.{{FUNCTION_NAME}}(data, params);
+}

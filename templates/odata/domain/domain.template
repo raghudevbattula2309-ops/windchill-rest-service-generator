@@ -1,0 +1,8 @@
+{
+    "name": "{{PROJECT_NAME}}",
+    "id": "{{PROJECT_NAME}}",
+    "description": "{{PROJECT_NAME}}",
+    "nameSpace": "Geode.{{PROJECT_NAME}}",
+    "containerName": "Windchill",
+    "defaultVersion": "1"
+}

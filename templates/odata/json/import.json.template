@@ -1,0 +1,32 @@
+{
+  "imports": [
+    {
+      "name": "PTC",
+      "version": "3"
+    }
+  ],
+  "includeImportedEntitySets": false,
+  "functions": [
+    {
+      "name": "{{FUNCTION_NAME}}",
+      "importName": "{{FUNCTION_NAME}}",
+      "description": "{{FUNCTION_DESCRIPTION}}",
+      "includeInServiceDocument": true,
+      "parameters": [
+        {
+          "description": "{{INPUT_LABEL}}",
+          "name": "{{INPUT_PARAMETER}}",
+          "type": "String",
+          "isNullable": false,
+          "isCollection": false
+        }
+      ],
+      "returnType": {
+        "type": "{{OUTPUT_SCHEMA}}",
+        "isCollection": true,
+        "isNullable": true
+      }
+    }
+  ],
+  "actions": []
+}

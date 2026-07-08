@@ -1,0 +1,8 @@
+{
+    "name": "raghusupplier",
+    "id": "raghusupplier",
+    "description": "raghusupplier",
+    "nameSpace": "Geode.raghusupplier",
+    "containerName": "Windchill",
+    "defaultVersion": "1"
+}

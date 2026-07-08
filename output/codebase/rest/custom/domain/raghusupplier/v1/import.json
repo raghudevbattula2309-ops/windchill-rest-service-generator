@@ -1,0 +1,10 @@
+{
+    "imports": [
+        {
+            "name": "getraghusupplier",
+            "className": "raghusupplierODataHelper",
+            "methodName": "getraghusupplier",
+            "description": "raghusupplier REST Function"
+        }
+    ]
+}
