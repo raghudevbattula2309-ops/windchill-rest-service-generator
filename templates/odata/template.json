@@ -36,6 +36,11 @@
             "template": "java/sps_modification_list.template",
             "target": "src/ext/geode/{{PROJECT_NAME_LOWER}}/model",
             "output": "SPSModificationList{{PROJECT_NAME}}.java"
+        },
+        {
+            "template": "dynamic/schema",
+            "target": "codebase/rest/custom/schema",
+            "output": "{{OUTPUT_SCHEMA}}.json"
         }
     ]
 }
