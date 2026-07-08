@@ -1,4 +1,6 @@
 from dataclasses import dataclass
+from models.input_parameter import InputParameter
+from models.method_model import MethodModel
 
 
 @dataclass
@@ -11,8 +13,5 @@ class ProjectModel:
     project_name: str
     java_package: str
     java_class: str
-    function_name: str
-    input_label: str
-    input_parameter: str
-    output_schema: str
     output_directory: str
+    methods: list[MethodModel]

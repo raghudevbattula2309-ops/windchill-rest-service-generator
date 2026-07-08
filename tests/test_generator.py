@@ -1,14 +1,25 @@
 from core.project_generator import ProjectGenerator
 from models.project_model import ProjectModel
+from models.input_parameter import InputParameter
+from models.method_model import MethodModel
+from models.input_parameter import InputParameter
+
+method = MethodModel(
+    name="getFinalTest",
+    input_parameters=[
+        InputParameter(name="number", type="String", description="Change Order Number")
+    ],
+    root_object="WTChangeOrder2",
+    retrieval_strategy="NUMBER",
+    return_type="ModificationListSchema",
+)
+
 
 project = ProjectModel(
     project_name="FinalTest",
-    java_package="ext.geode.FinalTest.spsquery",
+    java_package="ext.geode.finaltest.spsquery",
     java_class="FinalTestODataHelper",
-    function_name="getFinalTest",
-    input_label="Change Order Number",
-    input_parameter="number",
-    output_schema="ModificationListSchema",
+    methods=[method],
     output_directory="output",
 )
 
