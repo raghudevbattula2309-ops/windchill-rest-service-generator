@@ -1,3 +1,5 @@
+from config.windchill_objects import OBJECTS
+from core.java.builders.output_mapper_builder import OutputMapperBuilder
 from models.method_model import MethodModel
 
 
@@ -13,25 +15,22 @@ class JavaMethodGenerator:
 
         parameter_string = ", ".join(parameters)
 
-        return f"""
-    public static Object {method.name}({parameter_string}) throws Exception {{
-
-        // ==========================================
-        // Root Object
-        // ==========================================
-
-        // {method.root_object}
-
-        // Retrieval Strategy:
-        // {method.retrieval_strategy}
+        windchill_object = OBJECTS[method.root_object]
 
         retrieval = (
-            f"{method.root_object} object = "
+            f"{method.root_object} "
+            f"{windchill_object.variable_name} = "
             f"get{method.root_object}FromNumber(number);"
         )
 
-        // TODO Business Logic
+        mapping = OutputMapperBuilder.generate(method)
 
-        return null;
+        return f"""
+    public static Object {method.name}({parameter_string}) throws Exception {{
+
+        {retrieval}
+
+        {mapping}
+
     }}
 """

@@ -1,0 +1,9 @@
+import wt.fc.PersistenceHelper;
+import wt.fc.QueryResult;
+import wt.query.QuerySpec;
+import wt.query.SearchCondition;
+import wt.util.WTException;
+
+import {{ROOT_OBJECT_PACKAGE}};
+import java.util.ArrayList;
+import java.util.List;

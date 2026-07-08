@@ -1,7 +1,7 @@
 /**
  * Fetch {{ROOT_OBJECT}} by number.
  */
-public {{ROOT_OBJECT}} get{{ROOT_OBJECT}}FromNumber(String number)
+private static {{ROOT_OBJECT}} get{{ROOT_OBJECT}}FromNumber(String number)
         throws WTException {
 
     QuerySpec qs = new QuerySpec({{ROOT_OBJECT}}.class);

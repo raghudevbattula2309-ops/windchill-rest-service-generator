@@ -10,6 +10,7 @@ class HelperMethodBuilder:
     @staticmethod
     def generate(project: ProjectModel, method: MethodModel) -> str:
 
+        # Currently we support retrieval by NUMBER only
         if method.retrieval_strategy != "NUMBER":
             return ""
 

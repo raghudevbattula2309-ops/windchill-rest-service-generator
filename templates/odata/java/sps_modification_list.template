@@ -1,0 +1,21 @@
+package {{JAVA_PACKAGE}}.model;
+
+import org.apache.olingo.commons.api.data.ComplexValue;
+import org.apache.olingo.commons.api.data.Property;
+import org.apache.olingo.commons.api.data.ValueType;
+
+public class SPSModificationList{{PROJECT_NAME}} {
+
+    private final String oDataObjectType;
+
+{{FIELDS}}
+
+    public SPSModificationList{{PROJECT_NAME}}(String oDataType) {
+        this.oDataObjectType = oDataType;
+    }
+
+{{GETTERS_SETTERS}}
+
+{{TO_ODATA}}
+
+}
