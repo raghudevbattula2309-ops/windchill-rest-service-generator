@@ -10,19 +10,23 @@ class SchemaGenerator:
 
         method = project.methods[0]
 
-        properties = []
+        attributes = []
 
         for attribute in method.output_attributes:
 
-            properties.append(
+            attributes.append(
                 {
-                    "name": attribute.dto_field_name,
+                    "name": attribute.display_name,
+                    "internalName": attribute.dto_field_name,
                     "type": attribute.data_type,
-                    "isCollection": False,
-                    "isNullable": True,
+                    "required": False,
                 }
             )
 
-        schema = {"name": method.return_type, "properties": properties}
+        schema = {
+            "name": method.return_type,
+            "description": f"Schema defining attributes for {method.return_type}",
+            "attributes": attributes,
+        }
 
-        return json.dumps(schema, indent=4)
+        return json.dumps(schema, indent=2)

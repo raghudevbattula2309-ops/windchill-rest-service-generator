@@ -45,7 +45,7 @@ class ProjectGenerator:
 
                 generated_content = DTOGenerator.generate(project)
 
-            elif template_info["template"] == "dynamic/schema":
+            elif template_info["template"] == "complexType/output_schema.template":
 
                 from core.schema_generator import SchemaGenerator
 

@@ -9,37 +9,50 @@ class JavaClassGenerator:
     @staticmethod
     def generate(project: ProjectModel) -> str:
 
-        business_methods = ""
-        helper_methods = ""
+        business_methods = []
+        helper_methods = []
 
         for method in project.methods:
+            business_methods.append(JavaMethodGenerator.generate(method))
+            helper_methods.append(HelperMethodBuilder.generate(project, method))
 
-            business_methods += JavaMethodGenerator.generate(method) + "\n"
+        business_methods_text = "\n".join(business_methods)
+        helper_methods_text = "\n".join(helper_methods)
 
-            helper_methods += HelperMethodBuilder.generate(project, method) + "\n"
+        first_method = project.methods[0]
+        windchill_object = OBJECTS[first_method.root_object]
 
-            method = project.methods[0]
-            windchill_object = OBJECTS[method.root_object]
+        imports = f"""import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
-            imports = f"""
-            import wt.fc.PersistenceHelper;
-            import wt.fc.QueryResult;
-            import wt.query.QuerySpec;
-            import wt.query.SearchCondition;
-            import wt.util.WTException;
+import org.apache.olingo.commons.api.data.ComplexValue;
+import org.apache.olingo.commons.api.data.Parameter;
+import org.apache.olingo.commons.api.data.Property;
+import org.apache.olingo.commons.api.data.ValueType;
+import org.apache.olingo.server.api.ODataApplicationException;
 
-            import {windchill_object.package};
-            """
+import com.ptc.odata.core.entity.function.FunctionProcessorData;
 
-            return f"""package {project.java_package};
+import wt.fc.PersistenceHelper;
+import wt.fc.QueryResult;
+import wt.query.QuerySpec;
+import wt.query.SearchCondition;
+import wt.util.WTException;
 
-            {imports}
+import {windchill_object.package};
+import {project.java_package}.model.{first_method.return_type};"""
 
-            public class {project.java_class} {{
+        return f"""package {project.java_package};
 
-            {business_methods}
+{imports}
 
-            {helper_methods}
+public class {project.java_class} {{
 
-            }}
-            """
+{business_methods_text}
+
+{helper_methods_text}
+
+}}
+"""

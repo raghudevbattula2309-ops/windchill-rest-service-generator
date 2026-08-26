@@ -11,7 +11,7 @@ class OutputMapperBuilder:
 
         lines = []
 
-        lines.append(f"{method.return_type} item = new {method.return_type}();")
+        lines.append(f"{method.return_type} item = new {method.return_type}(oDataObjectType);")
 
         lines.append("")
 
@@ -40,6 +40,9 @@ class OutputMapperBuilder:
             )
 
         lines.append("")
-        lines.append("return item;")
+        lines.append("List<ComplexValue> rows = new ArrayList<>();")
+        lines.append("rows.add(item.toOData().asComplex());")
+        lines.append("")
+        lines.append("return new Property(null, oDataObjectType, ValueType.COLLECTION_COMPLEX, rows);")
 
         return "\n        ".join(lines)
