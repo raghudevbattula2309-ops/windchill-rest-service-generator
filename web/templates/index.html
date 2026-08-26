@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form hx-post="/generate" hx-target="#result" hx-swap="innerHTML" class="bg-white rounded-lg shadow p-6 space-y-6">
+
+    <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1" for="project_name">Project Name</label>
+        <input type="text" id="project_name" name="project_name" placeholder="Example : IA4AE"
+               class="w-full rounded-md border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1" for="root_object">Root Object</label>
+        <select id="root_object" name="root_object"
+                class="w-full rounded-md border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                hx-get="/attributes" hx-target="#attributes-container" hx-swap="innerHTML" hx-trigger="change">
+            {% for name in objects.keys() %}
+            <option value="{{ name }}" {% if name == selected_root_object %}selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1" for="retrieval_strategy">Retrieval Strategy</label>
+        <select id="retrieval_strategy" name="retrieval_strategy"
+                class="w-full rounded-md border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            {% for key, strategy in strategies.items() %}
+            <option value="{{ key }}">{{ strategy.display_name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div>
+        <p class="block text-sm font-medium text-slate-700 mb-2">Output Attributes</p>
+        <div id="attributes-container" class="space-y-1">
+            {% include "partials/attributes.html" %}
+        </div>
+    </div>
+
+    <button type="submit"
+            class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md transition">
+        🚀 Generate Project
+    </button>
+
+    <div id="result"></div>
+</form>
+{% endblock %}

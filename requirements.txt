@@ -1,3 +1,7 @@
 streamlit
 pyyaml
 pydantic
+fastapi
+uvicorn
+jinja2
+python-multipart

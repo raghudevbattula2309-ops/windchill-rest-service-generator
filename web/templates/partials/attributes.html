@@ -1,0 +1,12 @@
+{% set windchill_object = objects[selected_root_object] %}
+{% if windchill_object.attributes %}
+    {% for attribute in windchill_object.attributes %}
+    <label class="flex items-center gap-2 text-sm text-slate-700">
+        <input type="checkbox" name="output_attributes" value="{{ attribute.display_name }}"
+               class="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500">
+        {{ attribute.display_name }}
+    </label>
+    {% endfor %}
+{% else %}
+    <p class="text-sm text-slate-400 italic">No attributes configured yet for {{ selected_root_object }}.</p>
+{% endif %}

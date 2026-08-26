@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windchill REST Studio</title>
+    <!-- CDN Tailwind: fine for an MVP, not meant for production -- swap to a real build (Tailwind CLI) before this ships as a product. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+</head>
+<body class="bg-slate-50 min-h-screen">
+    <div class="max-w-3xl mx-auto py-12 px-4">
+        <h1 class="text-3xl font-bold text-slate-900 mb-1">🚀 Windchill REST Studio</h1>
+        <p class="text-slate-500 mb-8">Generate a custom Windchill REST Service project.</p>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
