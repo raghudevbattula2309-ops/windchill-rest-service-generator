@@ -2,6 +2,7 @@ import streamlit as st
 from config.windchill_objects import OBJECTS
 from core.project_builder import ProjectBuilder
 from core.project_generator import ProjectGenerator
+from core.retrieval.registry import STRATEGIES
 
 st.set_page_config(page_title="Windchill REST Studio", page_icon="🚀", layout="wide")
 
@@ -13,11 +14,13 @@ project_name = st.text_input("Project Name", placeholder="Example : IA4AE")
 
 root_object = st.selectbox("Root Object", list(OBJECTS.keys()))
 
-retrieval_strategy = st.selectbox("Retrieval Strategy", ["NUMBER"])
+retrieval_strategy = st.selectbox(
+    "Retrieval Strategy",
+    options=list(STRATEGIES.keys()),
+    format_func=lambda key: STRATEGIES[key].display_name,
+)
 
 st.markdown("---")
-
-st.subheader("Output Attributes")
 
 st.subheader("Output Attributes")
 

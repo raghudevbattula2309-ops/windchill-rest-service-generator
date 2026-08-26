@@ -1,4 +1,5 @@
 from config.windchill_objects import OBJECTS
+from core.retrieval.registry import STRATEGIES
 from models.method_model import MethodModel
 from models.project_model import ProjectModel
 
@@ -9,6 +10,7 @@ class JavaMethodGenerator:
     def generate(project: ProjectModel, method: MethodModel) -> str:
 
         windchill_object = OBJECTS[method.root_object]
+        strategy = STRATEGIES[method.retrieval_strategy]
 
         param_extraction = []
         param_names = []
@@ -22,10 +24,7 @@ class JavaMethodGenerator:
         param_extraction_text = "\n".join(param_extraction)
         param_names_text = ", ".join(param_names)
 
-        retrieval = (
-            f"{method.root_object} {windchill_object.variable_name} = "
-            f"get{method.root_object}FromNumber({param_names_text});"
-        )
+        retrieval = strategy.retrieval_statement(project, method)
 
         return f"""
     // OData entry point -- called from import.js as helper.{method.name}(data, params)

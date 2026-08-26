@@ -1,5 +1,5 @@
 from core.java_method_generator import JavaMethodGenerator
-from core.java.builders.helper_method_builder import HelperMethodBuilder
+from core.retrieval.registry import STRATEGIES
 from models.project_model import ProjectModel
 from config.windchill_objects import OBJECTS
 
@@ -20,8 +20,9 @@ class JavaClassGenerator:
         helper_methods = []
 
         for method in project.methods:
+            strategy = STRATEGIES[method.retrieval_strategy]
             business_methods.append(JavaMethodGenerator.generate(project, method))
-            helper_methods.append(HelperMethodBuilder.generate(project, method))
+            helper_methods.append(strategy.helper_method_java(project, method))
 
         business_methods_text = "\n".join(business_methods)
         helper_methods_text = "\n".join(helper_methods)

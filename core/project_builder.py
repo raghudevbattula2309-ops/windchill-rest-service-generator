@@ -1,6 +1,6 @@
+from core.retrieval.registry import STRATEGIES
 from models.project_model import ProjectModel
 from models.method_model import MethodModel
-from models.input_parameter import InputParameter
 
 
 class ProjectBuilder:
@@ -13,13 +13,13 @@ class ProjectBuilder:
         output_attributes,
     ):
 
+        strategy = STRATEGIES[retrieval_strategy]
+
         method = MethodModel(
             name=f"get{project_name}",
             root_object=root_object,
             retrieval_strategy=retrieval_strategy,
-            input_parameters=[
-                InputParameter(name="number", type="String", description="Number")
-            ],
+            input_parameters=strategy.input_parameters(),
             output_attributes=output_attributes,
             return_type=f"SPSModificationList{project_name}",
         )
