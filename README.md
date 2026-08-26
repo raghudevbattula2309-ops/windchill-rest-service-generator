@@ -19,8 +19,8 @@ Status: Version 1.0 (UI Generation Complete)
 
 ## UI stack decision (final, 2026-08-27)
 
-**FastAPI + Jinja2 + HTMX is the product direction going forward.** Not
-Flutter, and not Streamlit long-term. Reasoning:
+**FastAPI + Jinja2 + HTMX is the UI**, not Flutter and no longer Streamlit.
+Reasoning:
 
 - The generator engine (`core/`, `config/`, `models/`) is Python and stays
   Python regardless of frontend choice. A Flutter frontend wouldn't remove
@@ -36,21 +36,15 @@ Flutter, and not Streamlit long-term. Reasoning:
   brandable, multi-tenant product (hard to skin, rerun-on-every-interaction
   model doesn't fit SaaS well).
 
-**Streamlit (`app.py`) stays for now as a fallback only**, until the
-FastAPI+HTMX UI has actually been run and verified end-to-end (it hasn't
-yet -- built and reviewed, but not executed, since no Python interpreter
-was available on the machine it was built on). Remove `app.py` and the
-`streamlit` dependency once the FastAPI UI is confirmed working.
+Streamlit was kept side by side as a fallback until the FastAPI+HTMX UI was
+verified end-to-end (it has been -- run live, an attribute-list HTMX swap
+confirmed, a real project generated and its output inspected on disk,
+2026-08-27) -- `app.py` and the `streamlit` dependency have since been
+removed.
 
 ## Running it
 
-**Streamlit** (fallback, until the FastAPI UI is verified):
-```
-streamlit run app.py
-```
-
-**FastAPI + HTMX** (the product direction):
 ```
 uvicorn web.main:app --reload
 ```
-Run from the project root in both cases, after `pip install -r requirements.txt`.
+Run from the project root, after `pip install -r requirements.txt`.
