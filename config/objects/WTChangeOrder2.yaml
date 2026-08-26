@@ -1,0 +1,17 @@
+name: WTChangeOrder2
+package: wt.change2.WTChangeOrder2
+number_attribute: NUMBER
+variable_name: changeOrder
+attributes:
+  - display_name: Number
+    dto_field_name: number
+    java_getter: getNumber()
+  - display_name: Name
+    dto_field_name: name
+    java_getter: getName()
+  - display_name: State
+    dto_field_name: state
+    java_getter: getLifeCycleState().toString()
+  - display_name: Version
+    dto_field_name: version
+    java_getter: getVersionIdentifier().getValue()

@@ -1,4 +1,5 @@
 from config.constants import Placeholders
+from config.windchill_objects import OBJECTS
 from models.project_model import ProjectModel
 
 
@@ -6,13 +7,6 @@ class PlaceholderEngine:
     """
     Replaces placeholders inside template files.
     """
-
-    root_object_packages = {
-        "WTPart": "wt.part.WTPart",
-        "WTDocument": "wt.doc.WTDocument",
-        "WTChangeOrder2": "wt.change2.WTChangeOrder2",
-        "ManagedBaseline": "wt.vc.baseline.ManagedBaseline",
-    }
 
     @staticmethod
     def replace(template_content: str, project: ProjectModel) -> str:
@@ -24,12 +18,7 @@ class PlaceholderEngine:
         # Future versions will iterate through project.methods.
         method = project.methods[0]
 
-        root_object_packages = {
-            "WTPart": "wt.part.WTPart",
-            "WTDocument": "wt.doc.WTDocument",
-            "WTChangeOrder2": "wt.change2.WTChangeOrder2",
-            "ManagedBaseline": "wt.vc.baseline.ManagedBaseline",
-        }
+        root_object = OBJECTS[method.root_object]
 
         replacements = {
             Placeholders.PROJECT_NAME: project.project_name,
@@ -42,10 +31,8 @@ class PlaceholderEngine:
             Placeholders.INPUT_PARAMETER: method.input_parameters[0].name,
             Placeholders.OUTPUT_SCHEMA: method.return_type,
             Placeholders.ROOT_OBJECT: method.root_object,
-            Placeholders.NUMBER_ATTRIBUTE: "NUMBER",
-            Placeholders.ROOT_OBJECT_PACKAGE: root_object_packages.get(
-                method.root_object, ""
-            ),
+            Placeholders.NUMBER_ATTRIBUTE: root_object.number_attribute,
+            Placeholders.ROOT_OBJECT_PACKAGE: root_object.package,
         }
 
         output = template_content

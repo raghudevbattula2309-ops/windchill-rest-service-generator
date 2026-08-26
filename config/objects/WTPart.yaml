@@ -1,0 +1,5 @@
+name: WTPart
+package: wt.part.WTPart
+number_attribute: NUMBER
+variable_name: part
+attributes: []

@@ -1,0 +1,5 @@
+name: WTDocument
+package: wt.doc.WTDocument
+number_attribute: NUMBER
+variable_name: document
+attributes: []

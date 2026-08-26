@@ -1,0 +1,5 @@
+name: ManagedBaseline
+package: wt.vc.baseline.ManagedBaseline
+number_attribute: NUMBER
+variable_name: baseline
+attributes: []
