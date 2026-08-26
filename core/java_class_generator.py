@@ -5,6 +5,13 @@ from config.windchill_objects import OBJECTS
 
 
 class JavaClassGenerator:
+    """
+    Generates <Name>ODataHelper.java -- the OData entry-point plumbing only
+    (signature, parameter extraction, retrieval, error handling). This file
+    is always regenerated and must never contain business logic: that lives
+    in <Name>BusinessLogic.java (see BusinessLogicGenerator), which is
+    generated once and never touched again.
+    """
 
     @staticmethod
     def generate(project: ProjectModel) -> str:
@@ -13,7 +20,7 @@ class JavaClassGenerator:
         helper_methods = []
 
         for method in project.methods:
-            business_methods.append(JavaMethodGenerator.generate(method))
+            business_methods.append(JavaMethodGenerator.generate(project, method))
             helper_methods.append(HelperMethodBuilder.generate(project, method))
 
         business_methods_text = "\n".join(business_methods)
@@ -22,15 +29,11 @@ class JavaClassGenerator:
         first_method = project.methods[0]
         windchill_object = OBJECTS[first_method.root_object]
 
-        imports = f"""import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+        imports = f"""import java.util.Locale;
 import java.util.Map;
 
-import org.apache.olingo.commons.api.data.ComplexValue;
 import org.apache.olingo.commons.api.data.Parameter;
 import org.apache.olingo.commons.api.data.Property;
-import org.apache.olingo.commons.api.data.ValueType;
 import org.apache.olingo.server.api.ODataApplicationException;
 
 import com.ptc.odata.core.entity.function.FunctionProcessorData;
@@ -41,13 +44,18 @@ import wt.query.QuerySpec;
 import wt.query.SearchCondition;
 import wt.util.WTException;
 
-import {windchill_object.package};
-import {project.java_package}.model.{first_method.return_type};"""
+import {windchill_object.package};"""
 
         return f"""package {project.java_package};
 
 {imports}
 
+/**
+ * GENERATED FILE -- rewritten every time "Generate Project" runs.
+ * Business logic lives in {project.project_name}BusinessLogic.java instead,
+ * which is generated once and never touched again. Do not hand-edit this
+ * file; changes here will be lost on the next regeneration.
+ */
 public class {project.java_class} {{
 
 {business_methods_text}

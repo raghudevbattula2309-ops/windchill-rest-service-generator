@@ -1,12 +1,12 @@
 from config.windchill_objects import OBJECTS
-from core.java.builders.output_mapper_builder import OutputMapperBuilder
 from models.method_model import MethodModel
+from models.project_model import ProjectModel
 
 
 class JavaMethodGenerator:
 
     @staticmethod
-    def generate(method: MethodModel) -> str:
+    def generate(project: ProjectModel, method: MethodModel) -> str:
 
         windchill_object = OBJECTS[method.root_object]
 
@@ -27,8 +27,6 @@ class JavaMethodGenerator:
             f"get{method.root_object}FromNumber({param_names_text});"
         )
 
-        mapping = OutputMapperBuilder.generate(method)
-
         return f"""
     // OData entry point -- called from import.js as helper.{method.name}(data, params)
     public static Property {method.name}(FunctionProcessorData functionProcessorData, Map<String, Parameter> paramMap) throws Exception {{
@@ -45,6 +43,8 @@ class JavaMethodGenerator:
 
         String oDataObjectType = functionProcessorData.getReturnType().getType().getFullQualifiedName().getFullQualifiedNameAsString();
 
-        {mapping}
+        // Business logic lives in {project.project_name}BusinessLogic, which is generated
+        // once and never overwritten -- see that class to change what gets returned.
+        return {project.project_name}BusinessLogic.buildResult({windchill_object.variable_name}, oDataObjectType);
     }}
 """

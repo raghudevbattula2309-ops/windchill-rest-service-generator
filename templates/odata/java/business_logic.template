@@ -1,0 +1,4 @@
+// Handled specially by ProjectGenerator -> core.java.business_logic_generator.BusinessLogicGenerator.
+// This file exists only for documentation; its content is never read.
+// See template.json's "onceOnly" flag on this entry -- once
+// <Name>BusinessLogic.java exists, it is never regenerated.

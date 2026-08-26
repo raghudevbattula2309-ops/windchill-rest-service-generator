@@ -28,6 +28,12 @@
             "output": "{{JAVA_CLASS}}.java"
         },
         {
+            "template": "java/business_logic.template",
+            "target": "src/ext/geode/{{PROJECT_NAME_LOWER}}/spsquery/",
+            "output": "{{PROJECT_NAME}}BusinessLogic.java",
+            "onceOnly": true
+        },
+        {
             "template": "complexType/output_schema.template",
             "target": "codebase/rest/custom/domain/{{PROJECT_NAME}}/v1/complexType/",
             "output": "{{OUTPUT_SCHEMA}}.json"
